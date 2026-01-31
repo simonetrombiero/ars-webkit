@@ -8,6 +8,7 @@ import type { ComponentType } from "react";
 import { ParticleSphereTestPage } from "../components/particle-sphere";
 import { ProximityEffectsTestPage } from "../components/proximity-effects";
 import { GlassBarsTestPage } from "../components/glass-bars";
+import { PathAnimationTestPage } from "../components/path-animation";
 
 export interface ComponentEntry {
   id: string;
@@ -30,5 +31,10 @@ export const COMPONENTS: ComponentEntry[] = [
     id: "glass-bars",
     name: "Glass Bars",
     TestPage: GlassBarsTestPage,
+  },
+  {
+    id: "path-animation",
+    name: "Path Animation",
+    TestPage: PathAnimationTestPage,
   },
 ];
