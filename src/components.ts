@@ -6,6 +6,7 @@
 
 import type { ComponentType } from "react";
 import { ParticleSphereTestPage } from "../components/particle-sphere";
+import { ProximityEffectsTestPage } from "../components/proximity-effects";
 
 export interface ComponentEntry {
   id: string;
@@ -18,5 +19,10 @@ export const COMPONENTS: ComponentEntry[] = [
     id: "particle-sphere",
     name: "Particle Sphere",
     TestPage: ParticleSphereTestPage,
+  },
+  {
+    id: "proximity-effects",
+    name: "Proximity Effects",
+    TestPage: ProximityEffectsTestPage,
   },
 ];
