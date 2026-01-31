@@ -35,7 +35,7 @@ const styles: Record<string, React.CSSProperties> = {
     minWidth: 140,
     maxWidth: 140,
     overflow: "hidden",
-    transition: "max-width 0.25s ease, padding 0.25s ease",
+    transition: "max-width 0.3s ease-out, padding 0.3s ease-out",
   },
   boxExpanded: {
     maxWidth: 320,
@@ -87,6 +87,18 @@ const styles: Record<string, React.CSSProperties> = {
     flexDirection: "column",
     alignItems: "flex-start",
     gap: "0.125rem 0",
+    maxHeight: 0,
+    opacity: 0,
+    overflow: "hidden",
+    transition: "opacity 0.25s ease-out, max-height 0.3s ease-out",
+  },
+  boxListVisible: {
+    maxHeight: 280,
+    opacity: 1,
+  },
+  boxListClosing: {
+    maxHeight: 0,
+    opacity: 0,
   },
   content: {
     flex: "1 1 auto",
@@ -95,9 +107,13 @@ const styles: Record<string, React.CSSProperties> = {
   },
 };
 
+const CLOSE_DURATION_MS = 350;
+
 export function App() {
   const [selectedId, setSelectedId] = useState<string>(COMPONENTS[0]?.id ?? "");
   const [expanded, setExpanded] = useState(false);
+  const [closing, setClosing] = useState(false);
+  const [listRevealed, setListRevealed] = useState(false);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const mountedRef = useRef(false);
 
@@ -105,18 +121,44 @@ export function App() {
     mountedRef.current = true;
   }, []);
 
+  useEffect(() => {
+    if (expanded && !closing) {
+      const id = requestAnimationFrame(() => {
+        requestAnimationFrame(() => setListRevealed(true));
+      });
+      return () => cancelAnimationFrame(id);
+    }
+    if (!expanded) setListRevealed(false);
+  }, [expanded, closing]);
+
+  useEffect(() => {
+    if (!closing) return;
+    const t = setTimeout(() => {
+      setExpanded(false);
+      setClosing(false);
+      setHoveredId(null);
+    }, CLOSE_DURATION_MS);
+    return () => clearTimeout(t);
+  }, [closing]);
+
   const selected = COMPONENTS.find((c) => c.id === selectedId);
   const TestPage = selected?.TestPage;
+  const showList = expanded || closing;
+  const listStyle = {
+    ...styles.boxList,
+    ...(listRevealed && !closing ? styles.boxListVisible : closing ? styles.boxListClosing : {}),
+  };
 
   return (
     <div style={styles.app}>
       <div
         style={styles.boxWrapper}
-        onMouseEnter={() => mountedRef.current && setExpanded(true)}
-        onMouseLeave={() => {
-          setExpanded(false);
-          setHoveredId(null);
+        onMouseEnter={() => {
+          if (!mountedRef.current) return;
+          setExpanded(true);
+          setClosing(false);
         }}
+        onMouseLeave={() => setClosing(true)}
       >
         <div
           style={{
@@ -128,8 +170,8 @@ export function App() {
             Components
             <span style={styles.boxArrow}>▼</span>
           </span>
-          {expanded && (
-            <div style={styles.boxList}>
+          {showList && (
+            <div style={listStyle}>
               {COMPONENTS.map((c) => (
               <button
                 key={c.id}
