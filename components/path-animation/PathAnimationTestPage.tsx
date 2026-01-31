@@ -62,7 +62,7 @@ export function PathAnimationTestPage() {
           <div style={styles.header}>Ars Webkit</div>
           <h1 style={styles.title}>Path Animation</h1>
           <p style={styles.description}>
-            Riempie e svuota il percorso con curva lento-veloce-lento.
+            Fills and empties the path with a slow-fast-slow curve.
           </p>
         </div>
         <div style={styles.right}>
