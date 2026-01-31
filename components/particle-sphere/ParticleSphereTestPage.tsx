@@ -75,11 +75,11 @@ export function ParticleSphereTestPage() {
         <div style={styles.right}>
           <div style={styles.canvasWrapper}>
             <ParticleSphere
-              particleCount={650}
-              particleRadius={0.9}
+              particleCount={1600}
+              particleRadius={0.5}
               sphereRadius={0.42}
-              mouseInfluence={22}
-              mouseRadius={110}
+              mouseInfluence={50}
+              mouseRadius={90}
               rotationSpeed={0}
               glow
             />

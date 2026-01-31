@@ -34,11 +34,11 @@ export function ParticleSphere({
   className = "",
   width,
   height,
-  particleCount = 600,
-  particleRadius = 0.9,
+  particleCount = 1600,
+  particleRadius = 0.5,
   sphereRadius = 0.4,
-  mouseInfluence = 22,
-  mouseRadius = 110,
+  mouseInfluence = 50,
+  mouseRadius = 90,
   rotationSpeed = 0,
   glow = true,
 }: ParticleSphereProps) {
@@ -129,7 +129,7 @@ export function ParticleSphere({
           const dist = Math.hypot(mouse.x - sx, mouse.y - sy);
           if (dist < mouseRadius && dist > 0) {
             const t = dist / mouseRadius;
-            const f = (1 - t) * (1 - t) * mouseInfluence;
+            const f = Math.pow(1 - t, 1.35) * mouseInfluence;
             dx = ((sx - mouse.x) / dist) * f;
             dy = ((sy - mouse.y) / dist) * f;
           }
@@ -140,21 +140,21 @@ export function ParticleSphere({
 
         const displaced = Math.hypot(dx, dy) > 2;
         if (glow && !displaced) {
-          const glowRadius = particleRadius * 1.8;
+          const glowRadius = particleRadius * 2;
           const g = ctx.createRadialGradient(
             px, py, 0,
             px, py, glowRadius
           );
-          g.addColorStop(0, "rgba(255,255,255,0.5)");
-          g.addColorStop(0.6, "rgba(255,255,255,0.12)");
-          g.addColorStop(1, "rgba(255,255,255,0)");
+          g.addColorStop(0, "rgba(220,220,230,0.45)");
+          g.addColorStop(0.6, "rgba(200,200,210,0.1)");
+          g.addColorStop(1, "rgba(200,200,210,0)");
           ctx.fillStyle = g;
           ctx.beginPath();
           ctx.arc(px, py, glowRadius, 0, Math.PI * 2);
           ctx.fill();
         }
 
-        ctx.fillStyle = "rgba(255,255,255,0.92)";
+        ctx.fillStyle = "rgba(210,212,220,0.82)";
         ctx.beginPath();
         ctx.arc(px, py, particleRadius, 0, Math.PI * 2);
         ctx.fill();
