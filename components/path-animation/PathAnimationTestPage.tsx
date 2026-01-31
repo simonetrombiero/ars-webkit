@@ -72,11 +72,11 @@ export function PathAnimationTestPage() {
               height={400}
               strokeWidth={42}
               fillColor="#fff"
-              emptyColor="#4f6ad8"
+              emptyColor="rgba(255,255,255,0.2)"
               backgroundColor="transparent"
-              fillDuration={2000}
-              emptyDuration={2000}
-              pauseBetween={400}
+              fillDuration={3800}
+              emptyDuration={3800}
+              pauseBetween={500}
             />
           </div>
         </div>
