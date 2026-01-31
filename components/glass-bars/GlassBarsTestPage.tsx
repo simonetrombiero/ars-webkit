@@ -5,10 +5,10 @@ import { GlassBars } from "./GlassBars";
 
 const styles: Record<string, React.CSSProperties> = {
   page: {
-    minHeight: "100vh",
+    height: "100%",
     background: "#050510",
     color: "#fff",
-    fontFamily: "system-ui, -apple-system, sans-serif",
+    fontFamily: "'Montserrat', system-ui, sans-serif",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -27,13 +27,12 @@ const styles: Record<string, React.CSSProperties> = {
     flex: "0 1 320px",
   },
   header: {
-    color: "#888",
     fontSize: "0.875rem",
     marginBottom: "0.5rem",
   },
   title: {
     fontSize: "2.25rem",
-    fontWeight: 700,
+    fontWeight: 600,
     margin: "0 0 0.75rem",
     letterSpacing: "-0.02em",
   },
@@ -53,7 +52,7 @@ const styles: Record<string, React.CSSProperties> = {
     paddingTop: "1.5rem",
     paddingLeft: "1.5rem",
     fontSize: "6.5rem",
-    fontWeight: 700,
+    fontWeight: 600,
     color: "#fff",
     textAlign: "left" as const,
     lineHeight: 0.92,

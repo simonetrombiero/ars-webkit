@@ -5,10 +5,10 @@ import { PathAnimation } from "./PathAnimation";
 
 const styles: Record<string, React.CSSProperties> = {
   page: {
-    minHeight: "100vh",
+    height: "100%",
     background: "#0a0a0a",
     color: "#fff",
-    fontFamily: "system-ui, -apple-system, sans-serif",
+    fontFamily: "'Montserrat', system-ui, sans-serif",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -27,13 +27,12 @@ const styles: Record<string, React.CSSProperties> = {
     flex: "0 1 320px",
   },
   header: {
-    color: "#888",
     fontSize: "0.875rem",
     marginBottom: "0.5rem",
   },
   title: {
     fontSize: "2.25rem",
-    fontWeight: 700,
+    fontWeight: 600,
     margin: "0 0 0.75rem",
     letterSpacing: "-0.02em",
   },
