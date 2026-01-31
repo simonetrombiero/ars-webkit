@@ -40,7 +40,11 @@ const styles: Record<string, React.CSSProperties> = {
   boxExpanded: {
     maxWidth: 320,
     padding: "0.5rem 0.75rem",
+    flexDirection: "column",
+    alignItems: "flex-start",
     justifyContent: "flex-start",
+    flexWrap: "nowrap",
+    gap: "0.125rem 0",
   },
   boxLabel: {
     display: "flex",
@@ -76,6 +80,13 @@ const styles: Record<string, React.CSSProperties> = {
   boxItemArrow: {
     fontSize: "0.7rem",
     opacity: 0.8,
+  },
+  boxList: {
+    paddingTop: "30px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    gap: "0.125rem 0",
   },
   content: {
     flex: "1 1 auto",
@@ -117,8 +128,9 @@ export function App() {
             Components
             <span style={styles.boxArrow}>▼</span>
           </span>
-          {expanded &&
-            COMPONENTS.map((c) => (
+          {expanded && (
+            <div style={styles.boxList}>
+              {COMPONENTS.map((c) => (
               <button
                 key={c.id}
                 type="button"
@@ -137,7 +149,9 @@ export function App() {
                 </span>
                 {c.name}
               </button>
-            ))}
+              ))}
+            </div>
+          )}
         </div>
       </div>
 
