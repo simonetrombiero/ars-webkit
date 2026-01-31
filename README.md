@@ -1,6 +1,10 @@
-# ars-webkit
+# Ars Webkit
 
-Progetto con più componenti React, ognuno in una cartella dedicata. Ogni componente ha la propria pagina di test.
+I see a beautiful effects online, I spend tokens to make React components of it.
+
+Enjoy 🌱
+
+---
 
 ## Struttura
 
@@ -15,7 +19,7 @@ ars-webkit/
 │   └── <altro>/         # Altri componenti (stessa struttura)
 ├── src/
 │   ├── App.tsx          # Shell con navigazione tra componenti
-│   ├── components.ts    # Registro componenti (aggiungi qui i nuovi)
+│   ├── components.ts   # Registro componenti (aggiungi qui i nuovi)
 │   └── main.tsx
 ├── index.html
 ├── package.json
@@ -38,7 +42,7 @@ ars-webkit/
    { id: "nuovo", name: "Nuovo", TestPage: NuovoTestPage },
    ```
 
-Il nuovo componente apparirà nella barra di navigazione e potrai testarlo dall’app.
+Il nuovo componente apparirà nella barra di navigazione e potrai testarlo dall'app.
 
 ## Comandi
 
@@ -51,4 +55,4 @@ npm run preview # anteprima della build
 
 ## Test
 
-Avvia `npm run dev`, apri http://localhost:5173 e usa la barra in alto per passare da un componente all’altro.
+Avvia `npm run dev`, apri http://localhost:5173 e usa la barra in alto per passare da un componente all'altro.
