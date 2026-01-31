@@ -55,9 +55,9 @@ const styles: Record<string, React.CSSProperties> = {
   },
   canvasWrapper: {
     width: "100%",
-    maxWidth: 520,
-    aspectRatio: "4/3",
-    maxHeight: 420,
+    maxWidth: 620,
+    aspectRatio: "1",
+    minHeight: 420,
   },
 };
 

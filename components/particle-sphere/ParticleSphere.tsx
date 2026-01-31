@@ -3,6 +3,9 @@
 import React, { useRef, useEffect, useCallback, useState } from "react";
 
 const GOLDEN_RATIO = (1 + Math.sqrt(5)) / 2;
+const TILT_DEG = 10;
+const TILT_X = (TILT_DEG * Math.PI) / 180;
+const TILT_Z = (TILT_DEG * Math.PI) / 180;
 const POINTS_ON_SPHERE = (n: number) =>
   Array.from({ length: n }, (_, i) => {
     const y = 1 - (i / (n - 1)) * 2;
@@ -105,23 +108,41 @@ export function ParticleSphere({
 
       const mouse = mouseRef.current;
 
+      const cosTiltX = Math.cos(TILT_X);
+      const sinTiltX = Math.sin(TILT_X);
+      const cosTiltZ = Math.cos(TILT_Z);
+      const sinTiltZ = Math.sin(TILT_Z);
+
       for (const p of pointsRef.current) {
         let x = p.x,
           y = p.y,
           z = p.z;
 
-        let ty = y * cosX - z * sinX;
-        let tz = y * sinX + z * cosX;
+        // Inclinazione fissa 10° su X e Z
+        let ty = y * cosTiltX - z * sinTiltX;
+        let tz = y * sinTiltX + z * cosTiltX;
         y = ty;
         z = tz;
-
-        let tx = x * cosY + z * sinY;
-        tz = -x * sinY + z * cosY;
+        let tx = x * cosTiltZ - y * sinTiltZ;
+        ty = x * sinTiltZ + y * cosTiltZ;
         x = tx;
-        z = tz;
+        y = ty;
+
+        let ty2 = y * cosX - z * sinX;
+        let tz2 = y * sinX + z * cosX;
+        y = ty2;
+        z = tz2;
+
+        let tx2 = x * cosY + z * sinY;
+        tz2 = -x * sinY + z * cosY;
+        x = tx2;
+        z = tz2;
 
         const sx = cx + x * scale;
         const sy = cy + y * scale;
+
+        // Scala in base alla profondità: punti verso lo schermo più grandi
+        const depthScale = 0.62 + 0.58 * ((z + 1) * 0.5);
 
         let dx = 0,
           dy = 0;
@@ -139,8 +160,9 @@ export function ParticleSphere({
         const py = sy + dy;
 
         const displaced = Math.hypot(dx, dy) > 2;
+        const r = particleRadius * depthScale;
         if (glow && !displaced) {
-          const glowRadius = particleRadius * 2;
+          const glowRadius = r * 2;
           const g = ctx.createRadialGradient(
             px, py, 0,
             px, py, glowRadius
@@ -156,7 +178,7 @@ export function ParticleSphere({
 
         ctx.fillStyle = "rgba(210,212,220,0.82)";
         ctx.beginPath();
-        ctx.arc(px, py, particleRadius, 0, Math.PI * 2);
+        ctx.arc(px, py, r, 0, Math.PI * 2);
         ctx.fill();
       }
 
